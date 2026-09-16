@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Admin overview — MediCore AI{% endblock %}
+{% block crumb %}Admin overview{% endblock %}
+{% block content %}
+<div class="page-head admin-head"><div><span class="eyebrow">CONTROL CENTER</span><h1>Good to see you, Admin.</h1><p>Monitor your MediCore AI healthcare workspace at a glance.</p></div><div class="head-actions"><a class="btn secondary" href="/about"><i class="fa-solid fa-code"></i> Project</a><a class="btn primary" href="/admin/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></div></div>
+<div class="stat-grid admin-stat-grid">
+  <div class="stat-card"><span class="stat-icon blue"><i class="fa-solid fa-users"></i></span><div><span>Patients</span><strong>{{ stats.patients }}</strong></div></div>
+  <div class="stat-card"><span class="stat-icon purple"><i class="fa-solid fa-user-doctor"></i></span><div><span>Doctors</span><strong>{{ stats.doctors }}</strong></div></div>
+  <div class="stat-card"><span class="stat-icon green"><i class="fa-solid fa-calendar-check"></i></span><div><span>Appointments</span><strong>{{ stats.appointments }}</strong></div></div>
+  <div class="stat-card"><span class="stat-icon orange"><i class="fa-solid fa-file-invoice-dollar"></i></span><div><span>Pending bills</span><strong>{{ stats.pending_bills }}</strong></div></div>
+</div>
+<div class="dashboard-grid admin-grid"><section class="panel"><div class="panel-head"><div><h2>Recent appointments</h2><p>Latest activity across the platform</p></div><span class="status-pill success">Live data</span></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Status</th></tr></thead><tbody>{% for item in recent %}<tr><td>{{ item.patient.name }}</td><td>{{ item.doctor.name }}</td><td>{{ item.appointment_date.strftime('%d %b %Y, %I:%M %p') }}</td><td><span class="status-pill {{ item.status }}">{{ item.status|capitalize }}</span></td></tr>{% else %}<tr><td colspan="4">No appointments yet.</td></tr>{% endfor %}</tbody></table></div></section><section class="panel admin-side-panel"><div class="panel-head"><div><h2>System snapshot</h2><p>Platform totals</p></div></div><div class="admin-mini-list"><div><span>Completed appointments</span><strong>{{ stats.completed_appointments }}</strong></div><div><span>Prescriptions</span><strong>{{ stats.prescriptions }}</strong></div><div><span>Admin account</span><strong>Protected</strong></div></div><div class="admin-note"><i class="fa-solid fa-circle-info"></i><p>Use environment variables <b>ADMIN_EMAIL</b> and <b>ADMIN_PASSWORD</b> before deployment.</p></div></section></div>
+{% endblock %}

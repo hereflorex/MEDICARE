@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Admin access — MediCore AI{% endblock %}
+{% block public_content %}
+<div class="admin-auth-page">
+  <div class="admin-auth-card">
+    <div class="admin-mark"><i class="fa-solid fa-shield-halved"></i></div>
+    <span class="eyebrow">MEDICORE AI · CONTROL CENTER</span>
+    <h1>Admin access</h1>
+    <p>Manage your healthcare platform from one secure overview.</p>
+    <form method="post" class="admin-form">
+      <label>Email<input type="email" name="email" placeholder="admin@example.com" required></label>
+      <label>Password<input type="password" name="password" placeholder="Enter admin password" required></label>
+      {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+      <button class="btn primary" type="submit">Enter control center <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+    <a class="text-link" href="/">Back to MediCare <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</div>
+{% endblock %}
