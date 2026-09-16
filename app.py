@@ -1564,6 +1564,6 @@ if __name__ == '__main__':
                 '5000'
             )
         ),
-        debug=True
+        debug=os.getenv('FLASK_DEBUG', '0') == '1'
     )
  
