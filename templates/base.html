@@ -16,12 +16,12 @@
 {% if current_user or current_role == 'admin' %}
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="{{ '/admin' if current_role == 'admin' else '/dashboard' }}"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>MediCore <b>AI</b></span></a>
+      <a class="brand" href="{{ '/admin' if current_role == 'admin' else '/dashboard' }}"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>Medicare <b>AI</b></span></a>
       <div class="user-mini">
         <div class="avatar">{{ (current_user.name[:1] if current_user else 'A')|upper }}</div>
         <div><strong>{{ current_user.name if current_user else 'System Admin' }}</strong><small>{{ current_role|capitalize }}</small></div>
       </div>
-      <nav class="side-nav">{% if current_role == 'admin' %}<a href="/admin" class="nav-link {% if request.path == '/admin' %}active{% endif %}"><i class="fa-solid fa-chart-line"></i><span>Admin overview</span></a>{% else %}
+      <nav class="side-nav">{% if current_role == 'admin' %}<a href="/admin" class="nav-link {% if request.path == '/admin' %}active{% endif %}"><i class="fa-solid fa-chart-line"></i><span>Admin Dashboard</span></a>{% else %}
         <a href="/dashboard" class="nav-link {% if request.path == '/dashboard' %}active{% endif %}"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
         <a href="/doctors" class="nav-link {% if request.path == '/doctors' %}active{% endif %}"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
         <a href="/appointments" class="nav-link {% if request.path == '/appointments' %}active{% endif %}"><i class="fa-regular fa-calendar-check"></i><span>Appointments</span></a>
@@ -31,7 +31,7 @@
         <a href="/about" class="nav-link {% if request.path == '/about' %}active{% endif %}"><i class="fa-solid fa-circle-info"></i><span>About</span></a>
       {% endif %}</nav>
       <div class="sidebar-account-label">ACCOUNT</div>
-      {% if current_role == 'admin' %}<a class="logout-link" href="/admin/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span><i class="fa-solid fa-chevron-right logout-arrow"></i></a>{% else %}<button type="button" class="logout-link" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span><i class="fa-solid fa-chevron-right logout-arrow"></i></button>{% endif %}
+      {% if current_role == 'admin' %}<a class="logout-link" href="/admin/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span><i class="fa-solid fa-chevron-right logout-icon"></i></a>{% else %}<a class="logout-link" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span><i class="fa-solid fa-chevron-right logout-icon"></i></a>{% endif %}
     </aside>
     <main class="main-shell">
       <header class="topbar">
@@ -39,7 +39,7 @@
         <div class="crumbs">{% block crumb %}Overview{% endblock %}</div>
         <div class="top-actions">
           <button class="icon-btn" title="Theme" onclick="cycleTheme()"><i id="themeIcon" class="fa-solid fa-circle-half-stroke"></i></button>
-          {% if current_role == 'admin'}<a class="profile-chip" href="/admin"><span class="avatar small">A</span><span class="hide-mobile">System Admin</span><i class="fa-solid fa-chevron-down hide-mobile"></i></a>{% else %}<a class="profile-chip" href="/profile"><span class="avatar small">{{ current_user.name[:1]|upper }}</span><span class="hide-mobile">{{ current_user.name }}</span><i class="fa-solid fa-chevron-down hide-mobile"></i></a>{% endif %}
+          {% if current_role == 'admin'%}<a class="profile-chip" href="/admin"><span class="avatar small">A</span><span class="hide-mobile">System Admin</span><i class="fa-solid fa-chevron-down hide-mobile"></i></a>{% endif %}
         </div>
       </header>
       <div class="page-content">{% block content %}{% endblock %}</div>
