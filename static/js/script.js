@@ -123,15 +123,3 @@ function setRegisterRole(role){pageRole=role;setPageRole(role);const doctor=role
 async function submitLoginPage(e){e.preventDefault();const error=$('#pageAuthError');if(error)error.textContent='';try{setLoading(true);const data=await api('/api/auth/login',{method:'POST',body:JSON.stringify({email:$('#pageLoginEmail').value,password:$('#pageLoginPassword').value,role:pageRole})});toast(data.message);location.href=data.redirect||'/dashboard'}catch(err){if(error)error.textContent=err.message;toast(err.message,'error')}finally{setLoading(false)}}
 async function submitRegisterPage(e){e.preventDefault();const error=$('#pageAuthError');if(error)error.textContent='';try{setLoading(true);const payload={role:pageRole,name:$('#pageRegName').value,email:$('#pageRegEmail').value,password:$('#pageRegPassword').value,phone:$('#pageRegPhone').value};if(pageRole==='patient'){payload.age=$('#pageRegAge').value;payload.address=$('#pageRegAddress').value}else payload.specialization=$('#pageRegSpecialization').value;const data=await api('/api/auth/register',{method:'POST',body:JSON.stringify(payload)});toast(data.message);location.href=data.redirect||'/dashboard'}catch(err){if(error)error.textContent=err.message;toast(err.message,'error')}finally{setLoading(false)}}
 if(location.pathname==='/register')setRegisterRole(pageRole);if(location.pathname==='/login')setPageRole(pageRole);
-
-/* --- NEW GLASS EFFECT & MOBILE TOGGLE --- */
-document.addEventListener('DOMContentLoaded', () => {
-  const sidebar = document.querySelector('.sidebar');
-  const toggleBtn = document.querySelector('#sidebar-toggle');
-
-  if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
-  }
-});

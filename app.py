@@ -33,17 +33,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = os.getenv('FLASK_ENV') == 'production'
-
-
-@app.after_request
-def apply_security_headers(response):
-    response.headers.setdefault('X-Content-Type-Options', 'nosniff')
-    response.headers.setdefault('Referrer-Policy', 'strict-origin-when-cross-origin')
-    response.headers.setdefault('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-    if os.getenv('FLASK_ENV') == 'production':
-        response.headers.setdefault('Strict-Transport-Security', 'max-age=63072000')
-    return response
+# Railway serves HTTPS; keep this configurable for local HTTP development.
+app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE', '1').lower() in {'1', 'true', 'yes'}
 
 db = SQLAlchemy(app)
 
@@ -484,10 +475,8 @@ def admin_login():
     if request.method == 'POST':
         email = str(request.form.get('email', '')).strip().lower()
         password = str(request.form.get('password', ''))
-        admin_email = os.getenv('ADMIN_EMAIL', '').strip().lower()
-        admin_password = os.getenv('ADMIN_PASSWORD', '')
-        if not admin_email or not admin_password:
-            return render_template('admin_login.html', error='Admin access is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD on the server.'), 503
+        admin_email = os.getenv('ADMIN_EMAIL', 'admin@medicare.local').strip().lower()
+        admin_password = os.getenv('ADMIN_PASSWORD', 'change-me')
         if email == admin_email and password == admin_password:
             session.clear()
             session['role'] = 'admin'
@@ -499,10 +488,9 @@ def admin_login():
 
 
 @app.route('/admin/logout')
-@app.route('/logout')
 def admin_logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('admin_login'))
 
 
 @app.route('/admin')
@@ -705,7 +693,6 @@ def register():
 
         return jsonify({
             'error': 'Could not create account',
-            'detail': str(exc)
         }), 500
 
 
@@ -764,6 +751,12 @@ def login():
         'user': user_payload(user, role),
         'redirect': url_for('dashboard')
     }), 200
+
+
+@app.get('/logout')
+def logout_page():
+    session.clear()
+    return redirect(url_for('index'))
 
 
 @app.post('/api/auth/logout')
@@ -1471,6 +1464,106 @@ def pay_invoice(invoice_id):
 
 
 # ============================================================
+# PROFILE
+# ============================================================
+
+@app.patch('/api/profile')
+@login_required
+def update_profile():
+
+    user = current_user()
+    role = session['role']
+
+    data = request.get_json(
+        silent=True
+    ) or {}
+
+    name = str(data.get('name', '')).strip()
+    email = str(data.get('email', '')).strip().lower()
+    phone = str(data.get('phone', '')).strip()
+
+    if not name:
+        return jsonify({'error': 'Name is required'}), 400
+
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400
+
+    if not phone:
+        return jsonify({'error': 'Phone is required'}), 400
+
+    if email != user.email:
+
+        existing_patient = Patient.query.filter(
+            func.lower(Patient.email) == email
+        ).first()
+
+        existing_doctor = Doctor.query.filter(
+            func.lower(Doctor.email) == email
+        ).first()
+
+        if (
+            (existing_patient and existing_patient.id != (user.id if role == 'patient' else None))
+            or (existing_doctor and existing_doctor.id != (user.id if role == 'doctor' else None))
+        ):
+            return jsonify({
+                'error': 'An account with this email already exists'
+            }), 409
+
+    user.name = name
+    user.email = email
+    user.phone = phone
+
+    if role == 'patient':
+
+        age_raw = str(data.get('age', '')).strip()
+
+        if age_raw:
+
+            try:
+                age = int(age_raw)
+            except ValueError:
+                return jsonify({'error': 'Enter a valid age'}), 400
+
+            if age < 1 or age > 120:
+                return jsonify({'error': 'Enter a valid age'}), 400
+
+            user.age = age
+
+        address = data.get('address')
+
+        if address is not None:
+            user.address = str(address).strip()
+
+        medical_history = data.get('medical_history')
+
+        if medical_history is not None:
+            user.medical_history = str(medical_history).strip()
+
+    else:
+
+        specialization = str(data.get('specialization', '')).strip()
+
+        if not specialization:
+            return jsonify({'error': 'Specialization is required'}), 400
+
+        user.specialization = specialization
+        user.bio = str(data.get('bio', '')).strip()
+
+    try:
+        db.session.commit()
+
+    except Exception:
+        db.session.rollback()
+        app.logger.exception('Profile update error')
+        return jsonify({'error': 'Could not update profile'}), 500
+
+    return jsonify({
+        'message': 'Profile updated successfully',
+        'user': user_payload(user, role)
+    })
+
+
+# ============================================================
 # CHANGE PASSWORD
 # ============================================================
 
@@ -1536,8 +1629,7 @@ def not_found(error):
         }), 404
 
     return render_template(
-        'index.html',
-        error_code=404
+        'index.html'
     ), 404
 
 
