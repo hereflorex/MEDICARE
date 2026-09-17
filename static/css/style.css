@@ -1128,4 +1128,22 @@ html[data-theme="system"] { --bg:#f1eee8; --surface:#fffdf9; --surface-2:#e8e8e2
   .redesign-features .feature-grid { grid-template-columns: 1fr; }
   .page-content { padding: 24px 16px 45px; }
   .dashboard-intro { padding: 24px 20px; }
+  .auth-page { display: block; min-height: 100svh; padding: 74px 14px 28px; }
+  .auth-back { position: absolute; top: 16px; left: 14px; font-size: 12px; }
+  .auth-page-card { display: block; width: 100%; max-width: 520px; margin: 0 auto; border-radius: 24px; overflow: hidden; }
+  .auth-page-visual { min-height: auto; padding: 28px 22px 24px; }
+  .auth-page-visual .brand { margin-bottom: 30px; }
+  .auth-page-copy h1 { font-size: 44px; line-height: .95; margin: 0 0 14px; }
+  .auth-page-copy p { font-size: 13px; line-height: 1.6; max-width: 330px; }
+  .auth-benefits { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 24px; }
+  .auth-benefits span { font-size: 9px; gap: 5px; white-space: nowrap; }
+  .auth-page-form { padding: 26px 20px 30px; }
+  .auth-form-heading h2 { font-size: 30px; line-height: 1; margin: 8px 0; }
+  .auth-form-heading p { font-size: 12px; line-height: 1.6; }
+  .page-role { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  .page-role button { min-height: 46px; }
+  .auth-page-form-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .auth-page-form-grid label { min-width: 0; font-size: 11px; }
+  .auth-page-form-grid input, .auth-page-form-grid select { width: 100%; min-height: 48px; font-size: 13px; }
+  .auth-page-form-grid .full-btn { margin-top: 4px; min-height: 50px; }
 }
