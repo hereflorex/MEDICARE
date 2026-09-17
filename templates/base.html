@@ -2,13 +2,13 @@
 <html lang="en" data-theme="system">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="MediCare modern hospital management system">
-  <title>{% block title %}MediCare{% endblock %}</title>
+  <meta name="description" content="Medicare by FLOREX — a secure, connected healthcare management platform.">
+  <title>{% block title %}Medicare by FLOREX{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260811-medical-v5">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260917-florex-redesign-v1">
 </head>
 <body data-role="{{ current_role or 'guest' }}">
 <div id="toastRoot" class="toast-root"></div>
@@ -16,7 +16,7 @@
 {% if current_user or current_role == 'admin' %}
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="{{ '/admin' if current_role == 'admin' else '/dashboard' }}"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>Medicare <b>AI</b></span></a>
+      <a class="brand" href="{{ '/admin' if current_role == 'admin' else '/dashboard' }}"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>Medicare <b>by FLOREX</b></span></a>
       <div class="user-mini">
         <div class="avatar">{{ (current_user.name[:1] if current_user else 'A')|upper }}</div>
         <div><strong>{{ current_user.name if current_user else 'System Admin' }}</strong><small>{{ current_role|capitalize }}</small></div>
@@ -48,7 +48,7 @@
 {% else %}
   {% block public_content %}{% endblock %}
 {% endif %}
-<script src="{{ url_for('static', filename='js/script.js') }}?v=20260811-medical-v5"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}?v=20260917-florex-redesign-v1"></script>
 {% block page_scripts %}{% endblock %}
 </body>
 </html>
