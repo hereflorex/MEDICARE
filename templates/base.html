@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260811-medical-v5">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260917-florex-redesign-v1">
 </head>
 <body data-role="{{ current_role or 'guest' }}">
 <div id="toastRoot" class="toast-root"></div>
@@ -48,7 +48,7 @@
 {% else %}
   {% block public_content %}{% endblock %}
 {% endif %}
-<script src="{{ url_for('static', filename='js/script.js') }}?v=20260811-medical-v5"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}?v=20260917-florex-redesign-v1"></script>
 {% block page_scripts %}{% endblock %}
 </body>
 </html>
