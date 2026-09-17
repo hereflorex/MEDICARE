@@ -31,6 +31,19 @@ if not database_url:
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = os.getenv('FLASK_ENV') == 'production'
+
+
+@app.after_request
+def apply_security_headers(response):
+    response.headers.setdefault('X-Content-Type-Options', 'nosniff')
+    response.headers.setdefault('Referrer-Policy', 'strict-origin-when-cross-origin')
+    response.headers.setdefault('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+    if os.getenv('FLASK_ENV') == 'production':
+        response.headers.setdefault('Strict-Transport-Security', 'max-age=63072000')
+    return response
 
 db = SQLAlchemy(app)
 
@@ -471,8 +484,10 @@ def admin_login():
     if request.method == 'POST':
         email = str(request.form.get('email', '')).strip().lower()
         password = str(request.form.get('password', ''))
-        admin_email = os.getenv('ADMIN_EMAIL', 'admin@medicare.local').strip().lower()
-        admin_password = os.getenv('ADMIN_PASSWORD', 'change-me')
+        admin_email = os.getenv('ADMIN_EMAIL', '').strip().lower()
+        admin_password = os.getenv('ADMIN_PASSWORD', '')
+        if not admin_email or not admin_password:
+            return render_template('admin_login.html', error='Admin access is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD on the server.'), 503
         if email == admin_email and password == admin_password:
             session.clear()
             session['role'] = 'admin'
@@ -484,9 +499,10 @@ def admin_login():
 
 
 @app.route('/admin/logout')
+@app.route('/logout')
 def admin_logout():
     session.clear()
-    return redirect(url_for('admin_login'))
+    return redirect(url_for('index'))
 
 
 @app.route('/admin')
@@ -1520,7 +1536,8 @@ def not_found(error):
         }), 404
 
     return render_template(
-        'index.html'
+        'index.html',
+        error_code=404
     ), 404
 
 

@@ -108,7 +108,7 @@ document.addEventListener('click',e=>{
   if(sidebar?.classList.contains('open') && !sidebar.contains(e.target) && !sidebarBtn){closeSidebar();}
   const publicNav=document.querySelector('.public-nav nav');
   const publicBtn=e.target.closest('.public-nav .mobile-only');
-  if(publicNav?.classList.contains('open') && !publicNav.contains(e.target) && !p8ublicBtn){closePublicNav();}
+  if(publicNav?.classList.contains('open') && !publicNav.contains(e.target) && !publicBtn){closePublicNav();}
   if(e.target.closest('.public-nav nav a'))closePublicNav();
 });
 window.addEventListener('resize',()=>{
