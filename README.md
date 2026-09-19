@@ -1,4 +1,4 @@
-# MediCare — Hospital Management System
+# MediCare — Hospital Management System 🥢
 
 > A full-stack healthcare management platform built as a BCA project to bring patients, doctors, appointments, prescriptions and billing into one organized workflow.
 
