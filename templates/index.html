@@ -1,17 +1,41 @@
 {% extends 'base.html' %}
-{% block title %}MediCare | Smarter healthcare, simpler care{% endblock %}
+{% block title %}MediCare | Your Health, Our Priority{% endblock %}
 {% block public_content %}
-<header class="public-nav">
-  <a class="brand dark-brand" href="/"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span>MediCare</a>
-  <nav><a href="#features">Features</a><a href="#workflow">How it works</a><a href="/about">About project</a></nav>
-  <div class="nav-cta"><a class="btn ghost" href="/login">Login</a><a class="btn primary" href="/register">Get started <i class="fa-solid fa-arrow-right"></i></a></div>
+<div class="medicare-home-v7">
+<header class="public-nav v7-nav">
+  <a class="brand v7-brand" href="/"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>MediCare</span></a>
+  <nav>
+    <a class="active" href="/">Home</a><a href="/doctors">Doctors</a><a href="/appointments">Appointments</a><a href="/prescriptions">Prescriptions</a><a href="/billing">Billing</a><a href="/about">About</a>
+  </nav>
+  <div class="v7-nav-tools"><button class="v7-search" type="button" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button><span class="v7-divider"></span><a class="btn v7-login" href="/login">Login</a><a class="btn v7-signup" href="/register">Sign Up</a></div>
   <button class="icon-btn mobile-only" onclick="togglePublicNav(this)" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
 </header>
-<section class="hero-new">
-  <div class="hero-copy"><div class="eyebrow"><span></span> SMART HEALTHCARE · BUILT FOR REAL WORKFLOWS</div><h1>Healthcare, <em>without the hassle.</em></h1><p>Appointments, prescriptions, profiles and billing — organized in one secure place for patients and doctors.</p><div class="hero-actions"><a class="btn primary large" href="/register"><i class="fa-solid fa-user-plus"></i> Create patient account</a><a class="btn glass large" href="/login?role=doctor">Doctor portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div><div class="trust-row"><span><i class="fa-solid fa-shield-halved"></i> Secure sessions</span><span><i class="fa-solid fa-mobile-screen"></i> Mobile ready</span><span><i class="fa-solid fa-bolt"></i> Fast workflow</span></div></div>
-  <div class="hero-visual"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="dashboard-preview"><div class="preview-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="preview-label">Patient overview</span></div><div class="preview-user"><div class="avatar xl">M</div><div><strong>Welcome back</strong><small>Your health at a glance</small></div><span class="status-pill green">Active</span></div><div class="preview-stats"><div><small>Appointments</small><b>08</b></div><div><small>Prescriptions</small><b>04</b></div><div><small>Pending bills</small><b>02</b></div></div><div class="preview-chart"><div class="chart-line"></div><div class="chart-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="preview-appointment"><span class="date-box">12<br><small>SEP</small></span><div><strong>Upcoming appointment</strong><small>Specialist consultation · 10:30 AM</small></div><span class="status-pill blue">Upcoming</span></div></div></div>
+<section class="hero-new v7-hero">
+  <div class="v7-hero-copy">
+    <div class="v7-eyebrow">Better Care <span>•</span> Healthier Tomorrow</div>
+    <h1>Your Health,<br><em>Our Priority</em></h1>
+    <p>Book appointments, consult trusted doctors, manage prescriptions and more — all in one place.</p>
+    <div class="hero-actions">
+      <a class="btn v7-primary large" href="/register">Book Appointment <i class="fa-solid fa-arrow-right"></i></a>
+      <a class="btn v7-outline large" href="/doctors">Explore Doctors</a>
+    </div>
+    <div class="trust-row v7-trust"><span><i class="fa-solid fa-shield-halved"></i> Secure sessions</span><span><i class="fa-solid fa-mobile-screen"></i> Mobile ready</span><span><i class="fa-solid fa-bolt"></i> Fast workflow</span></div>
+  </div>
+  <div class="hero-visual v7-visual">
+    <div class="v7-dashboard">
+      <div class="v7-dash-head"><div class="v7-dash-brand"><span class="v7-mini-logo"><i class="fa-solid fa-heart-pulse"></i></span><b>MediCare</b></div><i class="fa-regular fa-circle-user"></i></div>
+      <div class="v7-dash-body">
+        <aside><a class="active"><i class="fa-solid fa-grid-2"></i>Dashboard</a><a><i class="fa-regular fa-calendar-check"></i>Appointments</a><a><i class="fa-solid fa-prescription-bottle-medical"></i>Prescriptions</a><a><i class="fa-solid fa-file-invoice-dollar"></i>Billing</a><a><i class="fa-regular fa-circle-user"></i>Profile</a></aside>
+        <div class="v7-dash-main"><p class="v7-welcome">Welcome Back, User!</p><small>Here’s your health overview</small>
+          <div class="v7-stat-row"><div><small>Upcoming Appointments</small><b>2</b></div><div><small>Prescriptions</small><b>3</b></div><div><small>Total Bills</small><b>₹1,250</b></div></div>
+          <div class="v7-activity"><b>Recent Activity</b><div><span class="v7-act-icon"><i class="fa-regular fa-calendar-check"></i></span><p><strong>Appointment with Dr. Sharma</strong><small>12 Mar 2025 · 10:30 AM</small></p><i class="fa-solid fa-chevron-right"></i></div><div><span class="v7-act-icon"><i class="fa-solid fa-prescription-bottle-medical"></i></span><p><strong>Prescription Updated</strong><small>10 Mar 2025 · Medicine Added</small></p><i class="fa-solid fa-chevron-right"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<section id="features" class="feature-section"><div class="section-heading"><span class="eyebrow">ONE PORTAL</span><h2>Everything in one place.</h2><p>Designed as a full-stack college project with real authentication, database-backed workflows and responsive UI.</p></div><div class="feature-grid"><article class="feature-card"><span class="feature-icon blue"><i class="fa-solid fa-calendar-check"></i></span><h3>Appointments</h3><p>Find doctors, book future slots, reschedule or cancel your visits.</p></article><article class="feature-card"><span class="feature-icon purple"><i class="fa-solid fa-user-doctor"></i></span><h3>Patient & Doctor portals</h3><p>Separate account roles with role-aware dashboards and actions.</p></article><article class="feature-card"><span class="feature-icon green"><i class="fa-solid fa-prescription-bottle-medical"></i></span><h3>Digital records</h3><p>Keep prescriptions, profiles and billing information connected to the right account.</p></article></div></section>
-<section id="workflow" class="workflow-section"><div><span class="eyebrow">HOW IT WORKS</span><h2>Simple from sign-up to care.</h2></div><div class="workflow-grid"><div><b>01</b><h3>Create your account</h3><p>Choose Patient or Doctor and create a secure account.</p></div><div><b>02</b><h3>Use your portal</h3><p>See your own profile, appointments and records after login.</p></div><div><b>03</b><h3>Manage care</h3><p>Book visits, update availability and keep healthcare activity organized.</p></div></div></section>
-<section class="cta-section"><div><span class="eyebrow">MEDICARE COLLEGE PROJECT</span><h2>A clean, practical hospital management system.</h2><p>Built for demonstration and learning with Flask, SQLAlchemy, PostgreSQL and modern responsive frontend design.</p></div><a class="btn white large" href="/register">Start now <i class="fa-solid fa-arrow-right"></i></a></section>
+<section id="features" class="feature-section v7-section"><div class="section-heading"><span class="eyebrow">ONE PORTAL</span><h2>Everything in one place.</h2><p>A role-based hospital management system connecting patients, doctors and administration through one clean workflow.</p></div><div class="feature-grid"><article class="feature-card"><span class="feature-icon blue"><i class="fa-solid fa-calendar-check"></i></span><h3>Appointments</h3><p>Find doctors, book visits, reschedule or cancel appointments with a clear status workflow.</p></article><article class="feature-card"><span class="feature-icon purple"><i class="fa-solid fa-user-doctor"></i></span><h3>Patient & Doctor portals</h3><p>Separate role-aware dashboards keep each user focused on the actions they actually need.</p></article><article class="feature-card"><span class="feature-icon green"><i class="fa-solid fa-prescription-bottle-medical"></i></span><h3>Digital records</h3><p>Prescriptions, profiles and appointment-linked billing remain connected through the database.</p></article></div></section>
+<section id="workflow" class="workflow-section v7-section"><div><span class="eyebrow">HOW IT WORKS</span><h2>Simple from sign-up to care.</h2><p class="v7-workflow-intro">One connected journey instead of scattered hospital tasks.</p></div><div class="workflow-grid"><div><b>01</b><h3>Create your account</h3><p>Choose Patient or Doctor and create a secure account.</p></div><div><b>02</b><h3>Use your portal</h3><p>See your own profile, appointments and records after login.</p></div><div><b>03</b><h3>Manage care</h3><p>Book visits, manage availability and keep healthcare activity organized.</p></div></div></section>
+<section class="cta-section v7-cta"><div><span class="eyebrow">MEDICARE COLLEGE PROJECT</span><h2>A clean, practical hospital management system.</h2><p>Built with Flask, SQLAlchemy, PostgreSQL-ready data models and a responsive frontend.</p></div><a class="btn v7-primary large" href="/register">Start now <i class="fa-solid fa-arrow-right"></i></a></section>
+</div>
 {% endblock %}
