@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}MediCare — Better care, connected{% endblock %}
+{% block public_content %}
+<div class="public-site">
+<header class="public-nav">
+  <a class="brand public-brand" href="/"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span><span>MediCare</span></a>
+  <nav id="publicNav">
+    <a class="active" href="/">Home</a><a href="#services">Services</a><a href="#workflow">How it works</a><a href="/about">About</a>
+  </nav>
+  <div class="nav-actions">
+    <a class="nav-login" href="/login">Sign in</a>
+    <a class="btn primary nav-cta" href="/register">Get started <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <button class="icon-btn mobile-only" onclick="togglePublicNav(this)" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+</header>
+
+<section class="hero-v9">
+  <div class="hero-backdrop"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-copy">
+    <div class="hero-kicker"><span class="pulse-dot"></span> Connected healthcare, made simple</div>
+    <h1>Your care.<br><em>One clear place.</em></h1>
+    <p>Book appointments, discover doctors, manage prescriptions and keep your healthcare journey organized through one modern portal.</p>
+    <div class="hero-actions">
+      <a class="btn primary xl" href="/register">Start your journey <i class="fa-solid fa-arrow-right"></i></a>
+      <a class="btn glass xl" href="#workflow"><i class="fa-solid fa-arrow-down"></i> See how it works</a>
+    </div>
+    <div class="hero-trust">
+      <span><i class="fa-solid fa-shield-halved"></i> Protected sessions</span>
+      <span><i class="fa-solid fa-user-doctor"></i> Patient & doctor portals</span>
+      <span><i class="fa-solid fa-mobile-screen-button"></i> Responsive by design</span>
+    </div>
+  </div>
+  <div class="hero-stage">
+    <div class="hero-photo"></div>
+    <div class="hero-photo-glow"></div>
+    <div class="hero-float hero-float-top"><span class="float-icon"><i class="fa-solid fa-heart-pulse"></i></span><div><b>Care dashboard</b><small>Everything connected</small></div><i class="fa-solid fa-circle-check"></i></div>
+    <div class="hero-float hero-float-bottom"><span class="float-icon green"><i class="fa-solid fa-calendar-check"></i></span><div><b>Appointment confirmed</b><small>Doctor visit scheduled</small></div></div>
+    <div class="hero-glass-card">
+      <div class="mini-top"><span><i class="fa-solid fa-chart-simple"></i> Today's overview</span><i class="fa-solid fa-ellipsis"></i></div>
+      <div class="mini-stat-row"><div><small>Appointments</small><b>04</b><span class="up">+12%</span></div><div><small>Records</small><b>18</b><span class="soft">Updated</span></div></div>
+      <div class="mini-progress"><span><i class="fa-solid fa-circle"></i> Care plan progress</span><b>78%</b><div><i></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="proof-strip"><div><strong>One connected workflow</strong><span>Built around real hospital-management tasks.</span></div><div><i class="fa-solid fa-user-group"></i><span>Patients & doctors</span></div><div><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></div><div><i class="fa-solid fa-file-medical"></i><span>Digital records</span></div></section>
+
+<section id="services" class="section-v9">
+  <div class="section-head-v9"><span class="eyebrow">WHAT YOU CAN DO</span><h2>Healthcare tools without the clutter.</h2><p>Focused modules keep the important things close and the interface calm.</p></div>
+  <div class="feature-grid-v9">
+    <article class="feature-v9"><span class="feature-number">01</span><div class="feature-icon-v9"><i class="fa-regular fa-calendar-check"></i></div><h3>Appointments</h3><p>Find an available doctor, choose a future slot and track the status of every visit.</p><a href="/register">Book a visit <i class="fa-solid fa-arrow-right"></i></a></article>
+    <article class="feature-v9"><span class="feature-number">02</span><div class="feature-icon-v9 purple"><i class="fa-solid fa-user-doctor"></i></div><h3>Care portals</h3><p>Patients and doctors get role-aware dashboards with the actions they actually need.</p><a href="/register">Create portal <i class="fa-solid fa-arrow-right"></i></a></article>
+    <article class="feature-v9"><span class="feature-number">03</span><div class="feature-icon-v9 green"><i class="fa-solid fa-prescription-bottle-medical"></i></div><h3>Digital records</h3><p>Prescriptions, profiles and appointment-linked billing stay organized in one workflow.</p><a href="/login">Open portal <i class="fa-solid fa-arrow-right"></i></a></article>
+  </div>
+</section>
+
+<section id="workflow" class="workflow-v9">
+  <div class="workflow-art"><img src="{{ url_for('static', filename='img/appointments-hero.jpg') }}" alt="Healthcare appointment"><div class="workflow-badge"><i class="fa-solid fa-check"></i><span><b>Simple workflow</b><small>From account to care</small></span></div></div>
+  <div class="workflow-copy"><span class="eyebrow">HOW IT WORKS</span><h2>Three steps.<br><em>Less friction.</em></h2>
+    <div class="step"><b>01</b><div><h3>Create your portal</h3><p>Choose patient or doctor and create your account.</p></div></div>
+    <div class="step"><b>02</b><div><h3>Manage your care</h3><p>Use appointments, prescriptions, billing and profile tools.</p></div></div>
+    <div class="step"><b>03</b><div><h3>Stay connected</h3><p>Keep your healthcare activity in one focused workspace.</p></div></div>
+  </div>
+</section>
+
+<section class="cta-v9"><div><span class="eyebrow">MEDICARE · 2026</span><h2>Built as a practical full-stack healthcare project.</h2><p>Flask, SQLAlchemy and PostgreSQL-ready architecture with a responsive interface.</p></div><a class="btn primary xl" href="/register">Create an account <i class="fa-solid fa-arrow-right"></i></a></section>
+<footer class="footer-v9"><div><a class="brand public-brand" href="/"><span class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></span>MediCare</a><p>A focused hospital-management experience built by FLOREX.</p></div><div><b>Explore</b><a href="/about">About</a><a href="/login">Login</a><a href="/register">Register</a></div><div><b>Project</b><a href="https://github.com/hereflorex/Medicare_byFLOREX" target="_blank" rel="noopener">GitHub</a><a href="https://t.me/ByteCs" target="_blank" rel="noopener">Contact</a></div></footer>
+</div>
+{% endblock %}
