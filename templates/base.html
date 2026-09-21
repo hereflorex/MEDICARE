@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260811-medical-v5">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20260921-medical-v7-ui">
 </head>
-<body data-role="{{ current_role or 'guest' }}">
+<body data-role="{{ current_role or 'guest' }}" data-page="{{ request.path.strip('/').replace('/', '-') or 'home' }}">
 <div id="toastRoot" class="toast-root"></div>
 <div id="pageLoader" class="page-loader"><div class="loader-ring"></div></div>
 {% if current_user or current_role == 'admin' %}
@@ -48,7 +48,7 @@
 {% else %}
   {% block public_content %}{% endblock %}
 {% endif %}
-<script src="{{ url_for('static', filename='js/script.js') }}?v=20260811-medical-v5"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}?v=20260921-medical-v7-ui"></script>
 {% block page_scripts %}{% endblock %}
 </body>
 </html>
