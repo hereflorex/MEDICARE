@@ -23,14 +23,20 @@ function getMenuOverlay(){
   }
   return overlay;
 }
+function setMenuButton(btn, open, closeLabel='Close menu', openLabel='Open menu'){
+  if(!btn)return;
+  const icon=btn.querySelector('i');
+  if(icon){icon.classList.toggle('fa-bars',!open);icon.classList.toggle('fa-xmark',open);}
+  btn.setAttribute('aria-expanded',String(open));
+  btn.setAttribute('aria-label',open?closeLabel:openLabel);
+}
 function closeSidebar(){
   const sidebar=$('#sidebar');
   if(!sidebar)return;
   sidebar.classList.remove('open');
   $('#mobileMenuOverlay')?.classList.remove('show');
   document.body.classList.remove('menu-open');
-  const btn=document.querySelector('.topbar .mobile-only');
-  if(btn){btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open menu');}
+  setMenuButton(document.querySelector('.topbar .mobile-only'),false);
 }
 function toggleSidebar(btn){
   const sidebar=$('#sidebar');
@@ -43,22 +49,30 @@ function toggleSidebar(btn){
   }else{
     closeSidebar();
   }
-  const target=btn||document.querySelector('.topbar .mobile-only');
-  if(target){target.setAttribute('aria-expanded',String(willOpen));target.setAttribute('aria-label',willOpen?'Close menu':'Open menu');}
+  setMenuButton(btn||document.querySelector('.topbar .mobile-only'),willOpen);
 }
 function togglePublicNav(btn){
   const nav=document.querySelector('.public-nav nav');
   if(!nav)return;
   const willOpen=!nav.classList.contains('open');
   nav.classList.toggle('open',willOpen);
-  if(btn){btn.setAttribute('aria-expanded',String(willOpen));btn.setAttribute('aria-label',willOpen?'Close navigation':'Open navigation');}
+  document.body.classList.toggle('public-menu-open',willOpen);
+  setMenuButton(btn,willOpen,'Close navigation','Open navigation');
 }
 function closePublicNav(){
   const nav=document.querySelector('.public-nav nav');
   if(!nav)return;
   nav.classList.remove('open');
-  const btn=document.querySelector('.public-nav .mobile-only');
-  if(btn){btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','Open navigation');}
+  document.body.classList.remove('public-menu-open');
+  setMenuButton(document.querySelector('.public-nav .mobile-only'),false,'Close navigation','Open navigation');
+}
+
+function initRevealAnimations(){
+  const items=$$('.reveal-item,.reveal-section');
+  if(!items.length)return;
+  if(!('IntersectionObserver' in window)){items.forEach(x=>x.classList.add('is-visible'));return}
+  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -40px'});
+  items.forEach((el,i)=>{el.style.setProperty('--reveal-delay',`${Math.min(i%6,5)*70}ms`);observer.observe(el)});
 }
 
 async function logout(){try{await api('/api/auth/logout',{method:'POST'});location.href='/'}catch(e){toast(e.message,'error')}}
@@ -75,6 +89,12 @@ async function submitAuth(e){e.preventDefault();const err=$('#authError');err.te
 function cycleTheme(){const html=document.documentElement;const current=localStorage.getItem('medicare-theme')||'system';const next=current==='system'?'dark':current==='dark'?'light':'system';localStorage.setItem('medicare-theme',next);applyTheme(next)}
 function applyTheme(theme){document.documentElement.dataset.theme=theme;const icon=$('#themeIcon');if(icon)icon.className=`fa-solid ${theme==='dark'?'fa-moon':theme==='light'?'fa-sun':'fa-circle-half-stroke'}`}
 (function(){applyTheme(localStorage.getItem('medicare-theme')||'system')})();window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change',()=>{if((localStorage.getItem('medicare-theme')||'system')==='system')applyTheme('system')});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initRevealAnimations();
+  document.querySelectorAll('.public-nav nav a').forEach(a=>a.addEventListener('click',closePublicNav));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSidebar();closePublicNav()}});
+});
 
 function statCard(icon,label,value,sub,cls){return `<div class="stat-card"><span class="stat-icon ${cls}"><i class="fa-solid ${icon}"></i></span><div><small>${label}</small><strong>${value}</strong><p>${sub}</p></div></div>`}
 async function loadDashboard(){try{const d=await api('/api/dashboard');$('#welcomeTitle').textContent=`Welcome back, ${d.user.name.split(' ')[0]}.`;$('#welcomeSub').textContent=d.user.role==='doctor'?'Here is your clinical overview for today.':'Here is your health overview for today.';const s=d.stats;$('#statGrid').innerHTML=d.user.role==='patient'?statCard('fa-calendar-check','Appointments',s.appointments,'Total visits','blue')+statCard('fa-clock','Upcoming',s.upcoming,'Scheduled visits','purple')+statCard('fa-prescription-bottle-medical','Prescriptions',s.prescriptions,'Digital records','green')+statCard('fa-file-invoice-dollar','Pending bills',s.pending_bills,'Needs attention','orange'):statCard('fa-calendar-check','Appointments',s.appointments,'Total visits','blue')+statCard('fa-clock','Upcoming',s.upcoming,'Scheduled visits','purple')+statCard('fa-circle-check','Completed',s.completed,'Completed care','green')+statCard('fa-hourglass-half','Pending',s.pending,'Needs action','orange');$('#recentList').innerHTML=d.recent.length?d.recent.map(a=>activityCard(a,d.user.role)).join(''):`<div class="empty-state compact">No activity yet. Start by booking an appointment.</div>`}catch(e){toast(e.message,'error')}}

@@ -1,130 +1,88 @@
 {% extends 'base.html' %}
-{% block title %}About the Developers — MediCare{% endblock %}
+{% block title %}About MediCare — Project & Developers{% endblock %}
 {% block crumb %}About Project{% endblock %}
 
 {% macro about_body() %}
-<div class="public-about-shell medicare-about-v2">
-  <div class="about-public-nav">
-    {% if current_user %}
-      <a class="nav-back" href="/dashboard"><i class="fa-solid fa-arrow-left"></i> Back to dashboard</a>
-      <div class="about-nav-links"><a class="btn secondary" href="/profile">Profile</a></div>
-    {% else %}
-      <a class="nav-back" href="/"><i class="fa-solid fa-arrow-left"></i> Back to MediCare</a>
-      <div class="about-nav-links"><a class="btn secondary" href="/login">Login</a><a class="btn primary" href="/register">Get started</a></div>
-    {% endif %}
+<div class="public-about-shell medicare-about-v3">
+  <div class="about-v3-nav">
+    <a class="about-v3-back" href="{{ '/dashboard' if current_user else '/' }}"><i class="fa-solid fa-arrow-left"></i><span>{{ 'Back to dashboard' if current_user else 'Back to MediCare' }}</span></a>
+    <div class="about-v3-actions">
+      {% if current_user %}<a class="btn secondary" href="/profile">Profile</a>{% else %}<a class="btn secondary" href="/login">Login</a><a class="btn primary" href="/register">Get started</a>{% endif %}
+    </div>
   </div>
 
-  <section class="about-dev-hero">
-    <div class="about-dev-copy">
-      <span class="eyebrow"><i class="fa-solid fa-code"></i> BUILT BY STUDENTS</span>
-      <h1>Meet the people<br><em>behind MediCare.</em></h1>
-      <p>A student-built healthcare project shaped by two developers — from interface design and backend logic to database workflows, testing and deployment.</p>
-      <div class="about-dev-meta">
-        <span><i class="fa-solid fa-graduation-cap"></i> BCA Project</span>
-        <span><i class="fa-solid fa-location-dot"></i> Modasa, Gujarat</span>
-        <span><i class="fa-solid fa-calendar"></i> 2026</span>
+  <section class="about-v3-hero reveal-section">
+    <div class="about-v3-hero-copy">
+      <span class="eyebrow"><i class="fa-solid fa-code"></i> BCA PROJECT · 2026</span>
+      <h1>Built with code.<br><em>Designed for care.</em></h1>
+      <p>MediCare is a full-stack hospital management system built to connect patients, doctors and administration through one focused digital workflow.</p>
+      <div class="about-v3-actions-row">
+        <a class="btn primary large" href="https://github.com/hereflorex/Medicare_byFLOREX" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View project</a>
+        <a class="btn glass large" href="https://t.me/ByteCs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> Contact team</a>
       </div>
     </div>
-    <div class="about-dev-orbit" aria-hidden="true">
-      <span class="orbit-ring ring-one"></span><span class="orbit-ring ring-two"></span>
-      <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
-      <div class="about-dev-center"><i class="fa-solid fa-code"></i></div>
+    <div class="about-v3-hero-art" aria-hidden="true">
+      <div class="about-v3-glow"></div>
+      <div class="about-v3-orbit orbit-a"></div><div class="about-v3-orbit orbit-b"></div>
+      <div class="about-v3-code-card"><span><i class="fa-solid fa-terminal"></i> medicare</span><b>patient → doctor → care</b><small>Flask · SQLAlchemy · PostgreSQL-ready</small></div>
+      <div class="about-v3-float float-one"><i class="fa-solid fa-calendar-check"></i><span>Appointments</span></div>
+      <div class="about-v3-float float-two"><i class="fa-solid fa-shield-halved"></i><span>Secure sessions</span></div>
     </div>
   </section>
 
-  <section class="developers-section">
-    <div class="about-section-head">
-      <div><span class="eyebrow">THE DEVELOPERS</span><h2>Two minds. One project.</h2></div>
-      <p>We divided the work across interface, backend logic, database workflows and testing, then brought everything together into one application.</p>
-    </div>
+  <section class="about-v3-stats reveal-section">
+    <div class="about-v3-stat reveal-item"><strong>3</strong><span>Core roles</span><small>Patient · Doctor · Admin</small></div>
+    <div class="about-v3-stat reveal-item"><strong>6+</strong><span>Healthcare modules</span><small>Appointments · records · billing</small></div>
+    <div class="about-v3-stat reveal-item"><strong>1</strong><span>Connected portal</span><small>One workflow for the project</small></div>
+    <div class="about-v3-stat reveal-item"><strong>∞</strong><span>Room to improve</span><small>Built as a practical college project</small></div>
+  </section>
 
-    <div class="developer-grid">
-      <article class="developer-card developer-featured">
-        <div class="developer-photo-wrap">
-          <img class="developer-photo" src="{{ url_for('static', filename='img/dhvanit.jpg') }}" alt="Dhvanit">
-          <span class="developer-online"><i class="fa-solid fa-circle"></i> Developer</span>
-        </div>
-        <div class="developer-info">
-          <span class="developer-role">DEVELOPER · UI / FULL-STACK</span>
-          <h3>DHVANIT</h3><p class="developer-number">Roll No. 198</p>
-          <p>Focused on the frontend experience, responsive layouts, project structure and full-stack integration — with attention to making the project clean and presentation-ready.</p>
-          <div class="developer-links">
-            <a class="dev-link github" href="https://github.com/hereflorex" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> @hereflorex</a>
-            <a class="dev-link telegram" href="https://t.me/ByteCs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @ByteCs</a>
-          </div>
-        </div>
+  <section class="about-v3-section reveal-section">
+    <div class="about-v3-section-head"><span class="eyebrow">THE TEAM</span><h2>Two developers. One healthcare system.</h2><p>The project brings interface work, application logic, database workflows and testing together in one application.</p></div>
+    <div class="about-v3-team">
+      <article class="about-v3-person reveal-item">
+        <div class="about-v3-photo"><img src="{{ url_for('static', filename='img/dhvanit.jpg') }}" alt="Dhvanit"><span>Developer</span></div>
+        <div class="about-v3-person-body"><div class="about-v3-role">UI · FULL-STACK</div><h3>DHVANIT</h3><div class="about-v3-roll">Roll No. 198</div><p>Focused on frontend experience, responsive layouts, project structure and full-stack integration, with attention to making the project clean and presentation-ready.</p><div class="about-v3-links"><a href="https://github.com/hereflorex" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> @hereflorex</a><a href="https://t.me/ByteCs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @ByteCs</a></div></div>
       </article>
-
-      <article class="developer-card">
-        <div class="developer-photo-wrap developer-photo-wrap-secondary">
-          <img class="developer-photo" src="{{ url_for('static', filename='img/tirth.jpg') }}" alt="Tirth">
-          <span class="developer-online"><i class="fa-solid fa-circle"></i> Developer</span>
-        </div>
-        <div class="developer-info">
-          <span class="developer-role">DEVELOPER · BACKEND / LOGIC</span>
-          <h3>TIRTH</h3><p class="developer-number">Roll No. 123</p>
-          <p>Contributed to backend workflow, application logic and implementation, helping connect the project's healthcare modules into one usable system.</p>
-        </div>
+      <article class="about-v3-person reveal-item">
+        <div class="about-v3-photo"><img src="{{ url_for('static', filename='img/tirth.jpg') }}" alt="Tirth"><span>Developer</span></div>
+        <div class="about-v3-person-body"><div class="about-v3-role">BACKEND · LOGIC</div><h3>TIRTH</h3><div class="about-v3-roll">Roll No. 123</div><p>Contributed to backend workflow, application logic and implementation, helping connect the healthcare modules into one usable system.</p><div class="about-v3-links"><a href="https://t.me/ByteCs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> Team contact</a></div></div>
       </article>
     </div>
   </section>
 
-  <section class="project-strip">
-    <div class="project-strip-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-    <div><span class="eyebrow">THE PROJECT</span><h2>MediCare — Hospital Management System</h2><p>A practical full-stack BCA project covering authentication, role-based dashboards, appointments, prescriptions, billing, profiles and doctor availability.</p></div>
+  <section class="about-v3-section reveal-section">
+    <div class="about-v3-section-head"><span class="eyebrow">WHAT'S INSIDE</span><h2>More than a landing page.</h2><p>Every major screen has a job, and the UI keeps the same visual language across the application.</p></div>
+    <div class="about-v3-feature-grid">
+      <article class="about-v3-feature reveal-item"><span><i class="fa-solid fa-calendar-check"></i></span><h3>Appointments</h3><p>Doctor discovery, booking, rescheduling and status-driven appointment workflows.</p></article>
+      <article class="about-v3-feature reveal-item"><span><i class="fa-solid fa-user-doctor"></i></span><h3>Role portals</h3><p>Separate patient, doctor and admin experiences built around the actions each role needs.</p></article>
+      <article class="about-v3-feature reveal-item"><span><i class="fa-solid fa-prescription-bottle-medical"></i></span><h3>Digital records</h3><p>Profiles, prescriptions and healthcare activity remain connected through the application.</p></article>
+      <article class="about-v3-feature reveal-item"><span><i class="fa-solid fa-file-invoice-dollar"></i></span><h3>Billing</h3><p>Patient billing stays linked with appointment and account workflows for a cleaner portal.</p></article>
+    </div>
   </section>
 
-  <section class="about-detail-grid">
-
-  <article class="about-detail-card">
-    <span class="feature-icon blue">
-      <i class="fa-solid fa-layer-group"></i>
-    </span>
-    <h3>Our work</h3>
-    <p>
-      UI, responsive pages, patient and doctor portals,
-      workflow integration and project presentation.
-    </p>
-  </article>
-
-  <article class="about-detail-card">
-    <span class="feature-icon purple">
-      <i class="fa-solid fa-code"></i>
-    </span>
-    <h3>Technology</h3>
-    <p>
-      Python, Flask, SQLAlchemy, PostgreSQL/SQLite,
-      HTML5, CSS3 and vanilla JavaScript.
-    </p>
-  </article>
-
-  <a
-  class="about-detail-card college-link"
-  href="http://med.mlgandhimodasa.org/home"
-  target="_blank"
-  rel="noopener noreferrer"
->
-    <span class="feature-icon green">
-      <i class="fa-solid fa-building-columns"></i>
-    </span>
-
-    <h3>College</h3>
-
-    <p>
-      <strong>M. L. Gandhi Modasa</strong><br>
-      Modasa, Gujarat · BCA · 2026
-    </p>
-
-    <span class="college-visit">
-      Visit official website
-      <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    </span>
-  </a>
-
+  <section class="about-v3-stack reveal-section">
+    <div><span class="eyebrow">TECH STACK</span><h2>Simple tools. Practical architecture.</h2><p>Chosen for a manageable college project that can still grow into a larger application.</p></div>
+    <div class="about-v3-stack-list"><span>Python</span><span>Flask</span><span>SQLAlchemy</span><span>PostgreSQL-ready</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Railway</span></div>
   </section>
 
-  <section class="team-contact-card">
-    <div><span class="eyebrow">CONTACT THE TEAM</span><h2>Want to know more?</h2><p>For project discussion, demonstration or feedback, reach us on Telegram.</p></div>
+  <section class="about-v3-journey reveal-section">
+    <div class="about-v3-section-head"><span class="eyebrow">PROJECT JOURNEY</span><h2>From idea to working portal.</h2></div>
+    <div class="about-v3-timeline">
+      <div class="about-v3-step reveal-item"><b>01</b><div><h3>Plan</h3><p>Map roles, healthcare modules and the core user flow.</p></div></div>
+      <div class="about-v3-step reveal-item"><b>02</b><div><h3>Build</h3><p>Connect Flask routes, database models, templates and frontend interactions.</p></div></div>
+      <div class="about-v3-step reveal-item"><b>03</b><div><h3>Polish</h3><p>Refine responsive UI, animations, visual hierarchy and deployment readiness.</p></div></div>
+    </div>
+  </section>
+
+  <section class="about-v3-college reveal-section">
+    <div class="about-v3-college-icon"><i class="fa-solid fa-building-columns"></i></div>
+    <div><span class="eyebrow">COLLEGE PROJECT</span><h2>M. L. Gandhi Modasa</h2><p>Modasa, Gujarat · BCA · 2026</p></div>
+    <a class="btn secondary" href="http://med.mlgandhimodasa.org/home" target="_blank" rel="noopener noreferrer">Official website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+  </section>
+
+  <section class="about-v3-contact reveal-section">
+    <div><span class="eyebrow">MOTION. MEDICINE. CODE.</span><h2>Want to explore the project?</h2><p>For a demonstration, project discussion or feedback, reach the team on Telegram.</p></div>
     <a class="btn primary large" href="https://t.me/ByteCs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> @ByteCs</a>
   </section>
 </div>
