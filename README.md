@@ -5,8 +5,8 @@
 
 
 <p align="center">
-`<b>🏥 Build • Test • Fix • Improve`</b>``<br>`
-`<i>`FLOREX Healthcare Project`</i>`
+<b>🏥 Build • Test • Fix • Improve</b><br>
+<i>FLOREX Healthcare Project</i>
 </p>
 
 
