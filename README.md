@@ -403,7 +403,6 @@ No magic. Just iterations.
 
 -   GitHub: [@hereflorex](https://github.com/hereflorex)
 -   Instagram: [@attached_being](https://instagram.com/attached_being)
--   Brand: **FLOREX**
 
 Focus: - Flask integration - Frontend/UI - Authentication workflows -
 Database integration - Responsive design - Deployment - Project
