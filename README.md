@@ -3,14 +3,14 @@
 > **MediCare V9 --- A modern healthcare management platform built with
 > Flask, SQLAlchemy and a responsive web UI.**
 
-```{=html}
+{=html}
 <p align="center">
 ```
 `<b>`{=html}🏥 Build • Test • Fix • Improve`</b>`{=html}`<br>`{=html}
 `<i>`{=html}FLOREX Healthcare Project`</i>`{=html}
 ```{=html}
 </p>
-```
+
 
 ------------------------------------------------------------------------
 
