@@ -5,10 +5,9 @@
 
 {=html}
 <p align="center">
-```
 `<b>`{=html}🏥 Build • Test • Fix • Improve`</b>`{=html}`<br>`{=html}
 `<i>`{=html}FLOREX Healthcare Project`</i>`{=html}
-```{=html}
+{=html}
 </p>
 
 
