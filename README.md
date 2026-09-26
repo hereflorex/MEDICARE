@@ -402,7 +402,7 @@ No magic. Just iterations.
 **Full-Stack & UI Developer**
 
 -   GitHub: [@hereflorex](https://github.com/hereflorex)
--   Instagram: [@attached_being](https://instagram.com/bytescs)
+-   Instagram: [@bytescs](https://instagram.com/bytescs)
 
 Focus: - Flask integration - Frontend/UI - Authentication workflows -
 Database integration - Responsive design - Deployment - Project
